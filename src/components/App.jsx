@@ -17,6 +17,10 @@ export const App = () => {
   const [contacts, setContacts] = useState(getInitialcontacts);
   const [filter, setFilter] = useState('');
 
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
+
   const addContact = newContact => {
     if (
       contacts.find(
@@ -30,10 +34,6 @@ export const App = () => {
       { id: nanoid(), ...newContact },
     ]);
   };
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  });
 
   const deleteContact = id => {
     setContacts(prevContacts =>
